@@ -1,0 +1,26 @@
+<form  ng-submit="search(artist)">
+  <input type="text" name="artist" ng-model="artist">
+  <input type="submit" value="Search" >
+  <p>{{error}}</p>
+</form>
+<a href="https://accounts.spotify.com/authorize?client_id=24b64d7417e944088e1870eb5a808ff8&redirect_uri=http:%2F%2Flocalhost:2401%2Fcallback&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-read-private%20playlist-modify-private&response_type=token&state=123">
+Login
+</a>
+<ul>
+  <li ng-repeat="match in artistMatches" ng-click="searchSetLists(match.id)">{{match.name}}</li>
+</ul>
+<button type="button" name="button" ng-click="searchSetLists()">Go</button>
+<form>
+  <select
+    name="concert"
+    ng-model="selected.index"
+    ng-if="setlists"
+    >
+    <option ng-repeat="setlist in setlists" value="{{$index}}">{{setlist.title}}</option>
+  </select>
+</form>
+<ol>
+  <li ng-repeat="song in setlists[selected.index].set">{{song["@name"]}}</li>
+</ol>
+<button type="button" name="button" ng-click="createPlaylist(setlists[selected.index])">Create Playlist</button>
+<iframe  ng-src="{{getIframeSrc(playlistURI)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
