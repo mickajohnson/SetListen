@@ -1,5 +1,5 @@
 <form  ng-submit="search(artist)">
-  <input type="text" name="artist" ng-model="artist">
+  <input type="text" name="artist" ng-model="artist" required>
   <input type="submit" value="Search" >
   <p>{{error}}</p>
 </form>
@@ -9,7 +9,6 @@ Login
 <ul>
   <li ng-repeat="match in artistMatches" ng-click="searchSetLists(match.id)">{{match.name}}</li>
 </ul>
-<button type="button" name="button" ng-click="searchSetLists()">Go</button>
 <form>
   <select
     name="concert"

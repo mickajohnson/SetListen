@@ -81,7 +81,6 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
                 uris: spotifySongIds
               }
             }).then(response => {
-              console.log(response);
               callback(uri);
             });
         });
