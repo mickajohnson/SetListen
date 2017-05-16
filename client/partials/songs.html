@@ -4,7 +4,7 @@
   <p>{{error}}</p>
 </form>
 <a href="https://accounts.spotify.com/authorize?client_id=24b64d7417e944088e1870eb5a808ff8&redirect_uri=http:%2F%2Flocalhost:2401%2Fcallback&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-read-private%20playlist-modify-private&response_type=token&state=123">
-Login
+Login to Spotify
 </a>
 <ul>
   <li ng-repeat="match in artistMatches" ng-click="searchSetLists(match.id)">{{match.name}}</li>
@@ -21,5 +21,6 @@ Login
 <ol>
   <li ng-repeat="song in setlists[selected.index].set">{{song["@name"]}}</li>
 </ol>
-<button type="button" name="button" ng-click="createPlaylist(setlists[selected.index])">Create Playlist</button>
-<iframe  ng-src="{{getIframeSrc(playlistURI)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+<button ng-if="selected.index" type="button" name="button" ng-click="createPlaylist(setlists[selected.index])">Create Playlist</button>
+<iframe ng-show="playlistURI !== 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'"  ng-src="{{getIframeSrc(playlistURI)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+<h4>Sources: <a href="http://www.setlist.fm"setlist.fm>Setlist.fm</a>, <a href="https://musicbrainz.org/">MusicBrainz</a>, & <a href="https://www.spotify.com/us/">Spotify</a></h4>
