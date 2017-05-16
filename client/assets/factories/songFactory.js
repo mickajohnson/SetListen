@@ -28,7 +28,6 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
         Authorization: `Bearer ${accessToken}`,
       }
     };
-    console.log(set);
 
     $http(userReq).then(data => {
       const userId = data.data.id;
