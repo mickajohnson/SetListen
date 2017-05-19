@@ -21,15 +21,13 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
   };
 
   factory.createPlaylist = (set, accessToken, callback) => {
-    const userReq = {
+    $http({
       method: 'GET',
       url: 'https://api.spotify.com/v1/me',
       headers: {
         Authorization: `Bearer ${accessToken}`,
       }
-    };
-
-    $http(userReq).then(data => {
+    }).then(data => {
       const userId = data.data.id;
       $http({
         method: 'POST',
@@ -40,10 +38,8 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
         },
         data: { name: `${set.artist} - ${set.title}` }
       }).then(playlist => {
-        console.log(playlist);
         const uri = playlist.data.uri;
         const playlistId = playlist.data.id;
-
         const promises = set.set
         .filter(setItem => setItem['@name'] !== '')
         .map(setItem => {
@@ -79,7 +75,7 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
               data: {
                 uris: spotifySongIds
               }
-            }).then(response => {
+            }).then(() => {
               callback(uri);
             });
         });

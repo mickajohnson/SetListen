@@ -28,7 +28,7 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
         $scope.error = 'Sorry, no setlist info on that artist found';
       } else {
         $scope.error = '';
-        $scope.setlists = SetlistSorter(data.data.data.setlists.setlist);
+        $scope.setlists = setlistSorter(data.data.data.setlists.setlist);
       }
     });
   };
@@ -56,7 +56,7 @@ function getAcessToken(hash) {
   return undefined;
 }
 
-function AverageSetLength(sets) {
+function averageSetLength(sets) {
   let avg = 0;
   const buffer = 2;
   for (let i = 0; i < sets.length; i++) {
@@ -66,9 +66,9 @@ function AverageSetLength(sets) {
   return Math.ceil(avg) + buffer;
 }
 
-function SetlistSorter(setlistData) {
+function setlistSorter(setlistData) {
   const averages = { songs: [], avgLength: 0 };
-  const SortedSetlist = setlistData
+  const sortedSetlist = setlistData
   .filter(setlist => typeof setlist.sets.set === 'object' || Array.isArray(setlist.sets.set))
   .map(setlist => {
     const concert = {
@@ -98,17 +98,17 @@ function SetlistSorter(setlistData) {
     }
     return concert;
   });
-  const averageSet = CalcTypicalSet(averages, SortedSetlist);
-  SortedSetlist.unshift({
+  const averageSet = calcTypicalSet(averages, sortedSetlist);
+  sortedSetlist.unshift({
     set: averageSet,
-    title: `A Typical Recent ${SortedSetlist[1].artist} Set`,
-    artist: SortedSetlist[1].artist
+    title: `A Typical Recent ${sortedSetlist[1].artist} Set`,
+    artist: sortedSetlist[1].artist
   });
-  return SortedSetlist;
+  return sortedSetlist;
 }
 
-function CalcTypicalSet(averages, setlists) {
-  averages.avgLength = AverageSetLength(setlists);
+function calcTypicalSet(averages, setlists) {
+  averages.avgLength = averageSetLength(setlists);
   averages.songs.sort((a, b) => {
     if (a.occurrence < b.occurrence) {
       return 1;
