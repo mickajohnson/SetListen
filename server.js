@@ -12,5 +12,5 @@ app.get('/callback', function (req, res){
   res.redirect('/')
 });
 
-app.listen(8080, function(){console.log("listening on port 8080");
+app.listen(process.env.PORT || 2401, function(){console.log("listening on port 8080");
 })
