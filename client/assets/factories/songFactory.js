@@ -7,7 +7,7 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
   const REDIRECT_URI = 'http://localhost:2401/callback';
 
   factory.searchArtist = (artist, callback) => {
-    $http.get(`http://musicbrainz.org/ws/2/artist/?query=artist:${artist}&fmt=json`)
+    $http.get(`https://musicbrainz.org/ws/2/artist/?query=artist:${artist}&fmt=json`)
     .then(({ data }) => {
       callback(data);
     })
@@ -15,7 +15,7 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
   };
 
   factory.searchSetLists = (artist, callback) => {
-    $http.get(`http://api.setlist.fm/rest/0.1/artist/${artist}/setlists.json?`)
+    $http.get(`https://api.setlist.fm/rest/0.1/artist/${artist}/setlists.json?`)
     .then((data) => callback({ data }))
     .catch(error => { console.log(error); callback({ error }); });
   };
