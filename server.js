@@ -7,8 +7,8 @@ app.use(express.static(path.join(root, "client")));
 app.use(express.static(path.join(root, "bower_components")));
 
 app.get('/callback', function (req, res){
-  console.log(req);
-  console.log(res);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.redirect('/')
 });
 

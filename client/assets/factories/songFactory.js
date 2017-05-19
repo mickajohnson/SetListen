@@ -15,7 +15,7 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
   };
 
   factory.searchSetLists = (artist, callback) => {
-    $http.get(`https://api.setlist.fm/rest/0.1/artist/${artist}/setlists.json?`)
+    $http.get(`http://api.setlist.fm/rest/0.1/artist/${artist}/setlists.json?`)
     .then((data) => callback({ data }))
     .catch(error => { console.log(error); callback({ error }); });
   };
