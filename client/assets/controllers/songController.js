@@ -28,7 +28,7 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
         $scope.error = 'Sorry, no setlist info on that artist found';
       } else {
         $scope.error = '';
-        $scope.setlists = setlistSorter(data.data.data.setlists.setlist);
+        $scope.setlists = setlistSorter(data.setlists.setlist);
       }
     });
   };
