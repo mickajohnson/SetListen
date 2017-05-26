@@ -13,11 +13,7 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
 
   factory.searchSetLists = (artist, callback) => {
     $http.get(`/setlists/${artist}`)
-    .then(({ data }) => {
-      console.log(data);
-      callback(data);
-    })
-    .catch(error => { console.log(error); callback({ error }); });
+    .then(({ data }) => callback(data));
   };
 
   factory.createPlaylist = (set, accessToken, callback) => {

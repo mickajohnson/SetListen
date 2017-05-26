@@ -15,7 +15,7 @@ app.get('/callback', (req, res) => { res.redirect('/'); });
 app.get('/artists/:artist', (req, res) => {
   const { artist } = req.params;
   const options = {
-  url: `https://musicbrainz.org/ws/2/artist/?query=artist:${artist}&fmt=json`,
+  url: `https://musicbrainz.org/ws/2/artist/?query=artist:${encodeURIComponent(artist)}&fmt=json`,
   headers: {
     'User-Agent': 'SetListen/0.0.1 ( mickalsipjohnson@gmail.com )'
   },
@@ -35,7 +35,7 @@ app.get('/artists/:artist', (req, res) => {
 app.get('/setlists/:artist', (req, res) => {
   const { artist } = req.params;
   const options = {
-  url: `http://api.setlist.fm/rest/0.1/artist/${artist}/setlists.json?`,
+  url: `http://api.setlist.fm/rest/0.1/artist/${encodeURIComponent(artist)}/setlists.json?`,
   json: true
     };
   request(options, (error, response, body) => {

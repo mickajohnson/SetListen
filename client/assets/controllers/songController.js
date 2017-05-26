@@ -8,6 +8,7 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
   $scope.ACCESS_TOKEN = getAcessToken($location.hash());
 
   $scope.searchArtist = artist => {
+    $scope.displayStart = 0;
     if (artist.length < 1) {
       $scope.error = 'No artist entered';
     } else {
@@ -17,10 +18,25 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
         } else {
           $scope.error = '';
           $scope.artistMatches = data.artists;
+          $scope.displayedArtists = data.artists.slice(0, 3);
+          $scope.displayStart = 3;
         }
           });
     }
       };
+
+  $scope.changeDisplayed = () => {
+    $scope.displayedArtists = $scope.artistMatches.slice($scope.displayStart, $scope.displayStart + 3);
+    if ($scope.displayStart + 3 >= $scope.artistMatches.length) {
+      $scope.displayStart = 0;
+    } else {
+        $scope.displayStart += 3;
+    }
+  };
+  
+  $scope.changeColor = () => {
+    angular.element(document.querySelector('#hello')).removeClass('green').addClass('red')
+  }
 
   $scope.searchSetLists = artist => {
     songFactory.searchSetLists(artist, (data) => {
@@ -60,7 +76,9 @@ function averageSetLength(sets) {
   let avg = 0;
   const buffer = 2;
   for (let i = 0; i < sets.length; i++) {
-    avg += sets[i].set.length;
+    if (Array.isArray(sets[i].set)) {
+      avg += sets[i].set.length;
+    }
   }
   avg /= sets.length;
   return Math.ceil(avg) + buffer;
