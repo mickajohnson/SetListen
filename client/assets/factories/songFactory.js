@@ -75,7 +75,11 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
               callback(uri);
             });
         });
+        }).catch(error => {
+          callback({ error });
         });
+      }).catch(error => {
+        callback({ error });
       });
     };
   return factory;

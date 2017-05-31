@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const request = require('request');
+const favicon = require('serve-favicon');
 const app = express();
 const root = __dirname;
 
@@ -9,6 +10,7 @@ app.use(express.static(path.join(root, 'client')));
 app.use(express.static(path.join(root, 'bower_components')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(favicon(path.join(root, 'client', 'favicon.ico')));
 
 app.get('/callback', (req, res) => { res.redirect('/'); });
 

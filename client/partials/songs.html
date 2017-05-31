@@ -1,27 +1,60 @@
-<form  ng-submit="searchArtist(artist)">
-  <input type="text" name="artist" ng-model="artist" required>
-  <input type="submit" value="Search" >
+<div id="header">
+  <img id="logo" src="../logo.png">
+</div>
+<div id="error">
   <p>{{error}}</p>
-</form>
-<a href="https://accounts.spotify.com/authorize?client_id=24b64d7417e944088e1870eb5a808ff8&redirect_uri=https:%2F%2Fsetlisten%2Eherokuapp%2Ecom%2Fcallback&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-read-private%20playlist-modify-private&response_type=token&state=123">
-Login to Spotify
-</a>
-<ul ng-if="artistMatches">
-  <li ng-repeat="match in displayedArtists" ng-click="searchSetLists(match.id)">{{match.name}}</li>
-  <li ng-click="changeDisplayed()">See More</li>
-</ul>
-<form>
-  <select
-    name="concert"
-    ng-model="selected.index"
-    ng-if="setlists"
-    >
-    <option ng-repeat="setlist in setlists" value="{{$index}}">{{setlist.title}}</option>
-  </select>
-</form>
-<ol>
-  <li ng-repeat="song in setlists[selected.index].set">{{song["@name"]}}</li>
-</ol>
-<button ng-if="selected.index" type="button" name="button" ng-click="createPlaylist(setlists[selected.index])">Create Playlist</button>
-<iframe ng-show="playlistURI !== 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'"  ng-src="{{getIframeSrc(playlistURI)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-<h4>Sources: <a href="http://www.setlist.fm"setlist.fm>Setlist.fm</a>, <a href="https://musicbrainz.org/">MusicBrainz</a>, & <a href="https://www.spotify.com/us/">Spotify</a></h4>
+</div>
+<div id="main-body">
+  <div id="login-container" ng-if="searchable === false">
+    <div class="sub-container">
+      <!-- <a class="login" href="https://accounts.spotify.com/authorize?client_id=24b64d7417e944088e1870eb5a808ff8&redirect_uri=https:%2F%2Fsetlisten%2Eherokuapp%2Ecom%2Fcallback&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-read-private%20playlist-modify-private&response_type=token&state=123">
+      Login to Spotify
+      </a> -->
+      <a class="login" href="https://accounts.spotify.com/authorize?client_id=24b64d7417e944088e1870eb5a808ff8&redirect_uri=http:%2F%2Flocalhost%3A2401%2Fcallback&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-read-private%20playlist-modify-private&response_type=token&state=123">
+      Login to Spotify
+      </a>
+    </div>
+  </div>
+  <div id="search-container" ng-if="searchable">
+    <div class="sub-container">
+      <form ng-submit="searchArtist(artist)">
+        <label>Search artist to create setlist-based Spotify playlist</label>
+        <input type="text" name="artist" ng-model="artist" required>
+      </form>
+      <ul ng-if="artistMatches">
+        <li ng-repeat="match in displayedArtists" ng-click="searchSetLists(match.id)"><p ng-class="{selected_artist: match.id===selectedArtist}">{{match.name}}</p>? </li>
+        <li ng-click="changeDisplayed()">See More...</li>
+      </ul>
+    </div>
+  </div>
+  <div id="setlist-select-container" ng-if="setlists">
+    <div class="sub-container">
+      <div class="list-box">
+        <ul>
+          <li ng-class="{selected_setlist: $index===selectedSetlist}" ng-repeat="setlist in setlists" ng-click="setSelectedSetlist($index)">{{setlist.title}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="setlist-container" ng-if="selectedSetlist !== undefined">
+    <div ng-if="playlistURI === 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'">
+      <div class="list-box">
+        <ol>
+          <li ng-repeat="song in setlists[selectedSetlist].set">{{song["@name"]}}</li>
+        </ol>
+      </div>
+      <button type="button" name="button" ng-click="createPlaylist(setlists[selectedSetlist])">Create Playlist</button>
+    </div>
+    <iframe ng-show="playlistURI !== 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'"  ng-src="{{getIframeSrc(playlistURI)}}" frameborder="0" allowtransparency="true"></iframe>
+  </div>
+</div>
+<div id="footer">
+  <div class="footer-div footer-div-1">
+    <p ng-if="searchable" ><a class="login" href="https://accounts.spotify.com/authorize?client_id=24b64d7417e944088e1870eb5a808ff8&redirect_uri=https:%2F%2Fsetlisten%2Eherokuapp%2Ecom%2Fcallback&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-read-private%20playlist-modify-private&response_type=token&state=123">
+    Log Back in
+  </a></p>
+  </div>
+  <div class="footer-div footer-div-2">
+    <p>Made Possible With: <a href="http://www.setlist.fm"setlist.fm>Setlist.fm</a>, <a href="https://musicbrainz.org/">MusicBrainz</a>, & <a href="https://www.spotify.com/us/">Spotify</a></p>
+  </div>
+</div>

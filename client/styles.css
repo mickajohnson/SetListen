@@ -1,0 +1,224 @@
+body {
+  background-color: #333333
+}
+
+a {
+  color: #888888;
+  text-decoration: none;
+}
+
+#error, #main-body, #footer {
+  font-family: helvetica, sans-serif;
+  font-size: 10pt
+}
+
+#header{
+  display: flex;
+  justify-content: center;
+}
+
+#logo {
+  width: auto;
+  height: 150px;
+    margin: 10px 0px;
+  display: block;
+}
+
+#error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #c1a0a0
+}
+
+#main-body {
+  display: flex;
+  margin-top: 50px;
+}
+
+.login {
+  padding: 5px 20px;
+  background-color: #555555;
+}
+
+#login-container {
+  display: inline-block;
+  flex: 1;
+}
+
+#search-container {
+  display: inline-block;
+  flex: 1;
+  vertical-align: top;
+}
+
+#search-container label {
+  color: #888888;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#search-container input {
+  width: 100%;
+  height: 20px;
+  border: none;
+  outline-width: 0;
+  background-color: #111111;
+  color: #EEEEEE;
+  caret-color: #555555;
+}
+
+#search-container input:focus {
+  outline-width: 0;
+  background-color: #666666
+}
+
+#search-container form {
+  display: block;
+}
+
+#search-container ul {
+  list-style: none;
+  margin-top: 10px;
+  display: block;
+  padding: 0px;
+}
+
+#search-container li {
+  display: inline-block;
+  margin-right: 2px;
+  color: #888888;
+}
+
+#search-container p {
+  color: #AAAAAA;
+  text-decoration: underline;
+  display: inline-block;
+}
+
+#search-container p:hover {
+  cursor: pointer;
+}
+
+#search-container .selected_artist {
+  color: #13da1b;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#setlist-select-container {
+  display: inline-block;
+  flex: 1;
+  vertical-align: top;
+}
+
+#setlist-select-container ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  color: #DDDDDD;
+  background-color: #111111;
+}
+
+#setlist-select-container li {
+  border-bottom: 1px solid #888888;
+  padding: 10px;
+}
+
+#setlist-select-container .selected_setlist {
+  background-color: #666666;
+}
+
+#setlist-select-container li:hover {
+  cursor: pointer;
+}
+
+.list-box {
+  height: 200px;
+  overflow: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #777777;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-button {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+#setlist-container {
+  display: inline-block;
+  flex: 1;
+}
+
+#setlist-container ol {
+  background-color: #666666;
+  color: #AAAAAA;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#setlist-container li {
+  border-bottom: 1px solid #333333;
+  padding: 5px;
+}
+
+#setlist-container button {
+  color: #EEEEEE;
+  background-color: #111111;
+  width: 100%;
+  border: 0px;
+  padding: 5px;
+  margin-top: 10px
+}
+
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  border-top: 2px solid #888888;
+  color: #888888;
+  display: flex;
+  background-color: #333333;
+  padding: 0px 10px;
+}
+
+iframe {
+  width: 100%;
+  height: 300px;
+}
+
+.footer-div {
+  display: flex;
+  flex: 2
+}
+
+.footer-div-1 {
+  justify-content: flex-start;
+}
+
+.footer-div-2 {
+  justify-content: flex-end;
+}

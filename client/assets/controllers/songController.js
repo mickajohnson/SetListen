@@ -1,5 +1,5 @@
 app.controller('songController', ['$scope', 'songFactory', '$location', function ($scope, songFactory, $location) {
-  $scope.selected = {};
+  $scope.selectedSetlist = undefined;
 
   $scope.playlistURI = 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf';
 
@@ -7,16 +7,27 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
 
   $scope.ACCESS_TOKEN = getAcessToken($location.hash());
 
+  $scope.error = ' ';
+
+  if ($scope.ACCESS_TOKEN) {
+    $scope.searchable = true;
+  } else {
+    $scope.searchable = false;
+  }
+
+  $scope.selectedArtist = '1';
+
   $scope.searchArtist = artist => {
     $scope.displayStart = 0;
     if (artist.length < 1) {
       $scope.error = 'No artist entered';
     } else {
+      $scope.error = ' ';
       songFactory.searchArtist(artist, (data) => {
         if (data.error) {
           $scope.error = 'Servers busy - try again in a second';
         } else {
-          $scope.error = '';
+          $scope.error = ' ';
           $scope.artistMatches = data.artists;
           $scope.displayedArtists = data.artists.slice(0, 3);
           $scope.displayStart = 3;
@@ -33,30 +44,42 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
         $scope.displayStart += 3;
     }
   };
-  
+
   $scope.changeColor = () => {
     angular.element(document.querySelector('#hello')).removeClass('green').addClass('red')
   }
 
   $scope.searchSetLists = artist => {
+    $scope.selectedArtist = artist;
     songFactory.searchSetLists(artist, (data) => {
+      $scope.error = ' ';
       if (data.error) {
         $scope.error = 'Sorry, no setlist info on that artist found';
       } else {
-        $scope.error = '';
         $scope.setlists = setlistSorter(data.setlists.setlist);
       }
     });
   };
 
-  $scope.createPlaylist = (set) => {
-    if ($scope.selected === undefined) {
+  $scope.setSelectedSetlist = setNumber => {
+    if (setNumber !== $scope.selectedSetlist) {
+      $scope.playlistURI = 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf';
+      $scope.selectedSetlist = setNumber;
+    }
+  };
+
+  $scope.createPlaylist = set => {
+    if ($scope.selectedSetlist === undefined) {
       $scope.error = 'No setlist selected';
     } else {
-      $scope.error = '';
+      $scope.error = ' ';
       if ($scope.ACCESS_TOKEN) {
-        songFactory.createPlaylist(set, $scope.ACCESS_TOKEN, (uri) => {
-          $scope.playlistURI = uri;
+        songFactory.createPlaylist(set, $scope.ACCESS_TOKEN, (res) => {
+          if (typeof res === 'string') {
+            $scope.playlistURI = res;
+          } else {
+            $scope.error = 'You need to log back in to Spotify';
+          }
         });
       } else {
         $scope.error = 'You need to sign in to Spotify';
@@ -92,7 +115,7 @@ function setlistSorter(setlistData) {
     const concert = {
       artist: setlist.artist['@name'],
       set: [],
-      title: `${setlist['@eventDate']} - ${setlist.venue.city['@name']} - ${setlist.venue.city['@stateCode']}, ${setlist.artist['@name']}`
+      title: `${setlist['@eventDate']} - ${setlist.venue.city['@name']} - ${setlist.venue.city['@stateCode']}`
     };
     if (Array.isArray(setlist.sets.set)) {
       for (let i = 0; i < setlist.sets.set.length; i++) {
