@@ -3,12 +3,12 @@ body {
 }
 
 a {
-  color: #888888;
+  color: #7F7F7F;
   text-decoration: none;
 }
 
 #error, #main-body, #footer {
-  font-family: helvetica, sans-serif;
+  font-family: "Helvetica Neue", "HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 10pt
 }
 
@@ -38,7 +38,7 @@ a {
 
 .login {
   padding: 5px 20px;
-  background-color: #555555;
+  background-color: #474747;
 }
 
 #login-container {
@@ -53,7 +53,7 @@ a {
 }
 
 #search-container label {
-  color: #888888;
+  color: #7F7F7F;
   display: block;
   margin-bottom: 10px;
 }
@@ -63,14 +63,14 @@ a {
   height: 20px;
   border: none;
   outline-width: 0;
-  background-color: #111111;
-  color: #EEEEEE;
-  caret-color: #555555;
+  background-color: #474747;
+  color: #FFFFFF;
+  caret-color: #BCBEC0;
 }
 
 #search-container input:focus {
   outline-width: 0;
-  background-color: #666666
+  background-color: #1E1E1E
 }
 
 #search-container form {
@@ -87,11 +87,11 @@ a {
 #search-container li {
   display: inline-block;
   margin-right: 2px;
-  color: #888888;
+  color: #808285;
 }
 
 #search-container p {
-  color: #AAAAAA;
+  color: #BCBEC0;
   text-decoration: underline;
   display: inline-block;
 }
@@ -101,7 +101,7 @@ a {
 }
 
 #search-container .selected_artist {
-  color: #13da1b;
+  color: #1ED761;
 }
 
 .sub-container {
@@ -121,17 +121,17 @@ a {
   list-style: none;
   padding: 0px;
   margin: 0px;
-  color: #DDDDDD;
-  background-color: #111111;
+  color: #BCBEC0;
+  background-color: #1E1E1E;
 }
 
 #setlist-select-container li {
-  border-bottom: 1px solid #888888;
+  border-bottom: 1px solid #BCBEC0;
   padding: 10px;
 }
 
 #setlist-select-container .selected_setlist {
-  background-color: #666666;
+  background-color: #474747;
 }
 
 #setlist-select-container li:hover {
@@ -147,21 +147,21 @@ a {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 1);
+#setlist-select-container ::-webkit-scrollbar-track {
+  background-color: #1E1E1E
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: #777777;
+#setlist-select-container ::-webkit-scrollbar-thumb {
+  background-color: #7F7F7F;
   border-radius: 15px;
 }
 
-::-webkit-scrollbar-button {
-  background-color: rgba(0, 0, 0, 0);
+#setlist-select-container ::-webkit-scrollbar-button {
+  background-color: #1E1E1E
 }
 
-::-webkit-scrollbar-corner {
-  background-color: rgba(0, 0, 0, 1);
+#setlist-select-container ::-webkit-scrollbar-corner {
+  background-color: #1E1E1E
 }
 
 #setlist-container {
@@ -183,14 +183,34 @@ a {
 }
 
 #setlist-container button {
-  color: #EEEEEE;
-  background-color: #111111;
+  color: #FFFFFF;
+  background-color: #1E1E1E;
   width: 100%;
   border: 0px;
   padding: 5px;
   margin-top: 10px
 }
 
+#setlist-container button:hover {
+  cursor: pointer;
+}
+
+#setlist-container ::-webkit-scrollbar-track {
+  background-color: #666666
+}
+
+#setlist-container ::-webkit-scrollbar-thumb {
+  background-color: #BCBEC0;
+  border-radius: 15px;
+}
+
+#setlist-container ::-webkit-scrollbar-button {
+  background-color: #666666
+}
+
+#setlist-container ::-webkit-scrollbar-corner {
+  background-color: #666666
+}
 
 #footer {
   position: fixed;
@@ -198,8 +218,8 @@ a {
   left: 0;
   right: 0;
   height: 50px;
-  border-top: 2px solid #888888;
-  color: #888888;
+  border-top: 2px solid #474747;
+  color: #7F7F7F;
   display: flex;
   background-color: #333333;
   padding: 0px 10px;

@@ -23,7 +23,7 @@
       </form>
       <ul ng-if="artistMatches">
         <li ng-repeat="match in displayedArtists" ng-click="searchSetLists(match.id)"><p ng-class="{selected_artist: match.id===selectedArtist}">{{match.name}}</p>? </li>
-        <li ng-click="changeDisplayed()">See More...</li>
+        <li ng-click="changeDisplayed()"><p>See More...</p></li>
       </ul>
     </div>
   </div>
