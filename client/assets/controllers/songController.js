@@ -57,6 +57,9 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
         $scope.error = 'Sorry, no setlist info on that artist found';
       } else {
         $scope.setlists = setlistSorter(data.setlists.setlist);
+        if (!$scope.setlists) {
+          $scope.error = 'Sorry, no setlist info on that artist found';
+        }
       }
     });
   };
@@ -109,9 +112,12 @@ function averageSetLength(sets) {
 
 function setlistSorter(setlistData) {
   const averages = { songs: [], avgLength: 0 };
-  const sortedSetlist = setlistData
-  .filter(setlist => typeof setlist.sets.set === 'object' || Array.isArray(setlist.sets.set))
-  .map(setlist => {
+  let sortedSetlist = setlistData
+  .filter(setlist => typeof setlist.sets.set === 'object' || Array.isArray(setlist.sets.set));
+  if (sortedSetlist.length === 0) {
+    return false;
+  }
+  sortedSetlist = sortedSetlist.map(setlist => {
     const concert = {
       artist: setlist.artist['@name'],
       set: [],
