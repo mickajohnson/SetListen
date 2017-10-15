@@ -66,6 +66,7 @@ a {
   background-color: #474747;
   color: #FFFFFF;
   caret-color: #BCBEC0;
+  font-size: 14px;
 }
 
 #search-container input:focus {
@@ -79,7 +80,7 @@ a {
 
 #search-container ul {
   list-style: none;
-  margin-top: 10px;
+  margin-top: 0px;
   display: block;
   padding: 0px;
 }
@@ -115,6 +116,7 @@ a {
   display: inline-block;
   flex: 1;
   vertical-align: top;
+  width: 305px;
 }
 
 #setlist-select-container ul {
@@ -141,6 +143,8 @@ a {
 .list-box {
   height: 200px;
   overflow: scroll;
+  width: 305px;
+  margin: auto;
 }
 
 ::-webkit-scrollbar {
@@ -167,6 +171,7 @@ a {
 #setlist-container {
   display: inline-block;
   flex: 1;
+  text-align: center;
 }
 
 #setlist-container ol {
@@ -175,6 +180,7 @@ a {
   list-style: none;
   margin: 0px;
   padding: 0px;
+  text-align: left;
 }
 
 #setlist-container li {
@@ -185,10 +191,11 @@ a {
 #setlist-container button {
   color: #FFFFFF;
   background-color: #1E1E1E;
-  width: 100%;
+  width: 305px;
   border: 0px;
   padding: 5px;
-  margin-top: 10px
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 #setlist-container button:hover {
@@ -226,13 +233,15 @@ a {
 }
 
 iframe {
-  width: 100%;
+  width: 305px;
+  margin: auto;
   height: 300px;
 }
 
 .footer-div {
   display: flex;
-  flex: 2
+  flex: 2;
+  align-items: center;
 }
 
 .footer-div-1 {
@@ -241,4 +250,33 @@ iframe {
 
 .footer-div-2 {
   justify-content: flex-end;
+}
+
+@media (max-width:950px) {
+  #main-body {
+    display: block;
+    margin-top: 10px
+  }
+
+  #search-container, #login-container, #setlist-select-container, #setlist-container {
+    display: block;
+    margin-bottom: 15px;
+    width: auto;
+  }
+
+  #setlist-select-container {
+    padding-bottom: 30px;
+  }
+
+  #setlist-container button {
+    margin-bottom: 50px;
+  }
+
+  .footer-div-2 {
+    font-size: 10px;
+  }
+
+  #logo {
+    margin-top: 0px;
+  }
 }
