@@ -124,6 +124,9 @@ function setlistSorter(setlistData) {
       title: `${setlist['eventDate']} - ${setlist.venue.city['name']} - ${setlist.venue.city['stateCode']}`
     };
     if (Array.isArray(setlist.sets.set)) {
+      if (setlist.sets.set.length < 1) {
+        return null;
+      }
       for (let i = 0; i < setlist.sets.set.length; i++) {
         concert.set = concert.set.concat(setlist.sets.set[i].song);
       }
@@ -144,7 +147,7 @@ function setlistSorter(setlistData) {
       }
     }
     return concert;
-  });
+  }).filter(concert => concert);
   const averageSet = calcTypicalSet(averages, sortedSetlist);
   sortedSetlist.unshift({
     set: averageSet,
