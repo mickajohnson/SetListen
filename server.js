@@ -6,6 +6,7 @@ const favicon = require('serve-favicon');
 
 const app = express();
 const root = __dirname;
+const SETLIST_API_KEY = 'b4e726a6-924e-4ec9-9888-11203c43cad3';
 
 app.use(express.static(path.join(root, 'client')));
 app.use(express.static(path.join(root, 'bower_components')));
@@ -38,14 +39,18 @@ app.get('/artists/:artist', (req, res) => {
 app.get('/setlists/:artist', (req, res) => {
   const { artist } = req.params;
   const options = {
-  url: `http://api.setlist.fm/rest/0.1/artist/${encodeURIComponent(artist)}/setlists.json?`,
-  json: true
+  url: `https://api.setlist.fm/rest/1.0/artist/${encodeURIComponent(artist)}/setlists`,
+  json: true,
+  headers: {
+    'x-api-key': SETLIST_API_KEY,
+    Accept: 'application/json'
+  },
     };
   request(options, (error, response, body) => {
     if (response.statusCode === 503) {
       res.json({ error: 'Servers Busy' });
     } else if (response.statusCode === 200) {
-      res.json({ setlists: body.setlists });
+      res.json({ setlists: body.setlist });
     } else {
       res.json({ error: 'Server Error' });
     }

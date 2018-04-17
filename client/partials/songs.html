@@ -40,7 +40,7 @@
     <div ng-if="playlistURI === 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'">
       <div class="list-box">
         <ol>
-          <li ng-repeat="song in setlists[selectedSetlist].set">{{song["@name"]}}</li>
+          <li ng-repeat="song in setlists[selectedSetlist].set">{{song["name"]}}</li>
         </ol>
       </div>
       <button type="button" name="button" ng-click="createPlaylist(setlists[selectedSetlist])">Create Playlist</button>

@@ -56,7 +56,7 @@ app.controller('songController', ['$scope', 'songFactory', '$location', function
       if (data.error) {
         $scope.error = 'Sorry, no setlist info on that artist found';
       } else {
-        $scope.setlists = setlistSorter(data.setlists.setlist);
+        $scope.setlists = setlistSorter(data.setlists);
         if (!$scope.setlists) {
           $scope.error = 'Sorry, no setlist info on that artist found';
         }
@@ -119,9 +119,9 @@ function setlistSorter(setlistData) {
   }
   sortedSetlist = sortedSetlist.map(setlist => {
     const concert = {
-      artist: setlist.artist['@name'],
+      artist: setlist.artist['name'],
       set: [],
-      title: `${setlist['@eventDate']} - ${setlist.venue.city['@name']} - ${setlist.venue.city['@stateCode']}`
+      title: `${setlist['eventDate']} - ${setlist.venue.city['name']} - ${setlist.venue.city['stateCode']}`
     };
     if (Array.isArray(setlist.sets.set)) {
       for (let i = 0; i < setlist.sets.set.length; i++) {
@@ -132,7 +132,7 @@ function setlistSorter(setlistData) {
     }
     for (let i = 0; i < concert.set.length; i++) {
       const found = averages.songs.findIndex(song => {
-        return song['@name'] === concert.set[i]['@name'];
+        return song['name'] === concert.set[i]['name'];
       });
       if (found !== -1) {
         averages.songs[found].occurrence += 1;

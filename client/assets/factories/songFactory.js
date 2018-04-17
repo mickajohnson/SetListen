@@ -37,12 +37,12 @@ app.factory('songFactory', ['$http', '$q', function ($http, $q) {
         const uri = playlist.data.uri;
         const playlistId = playlist.data.id;
         const promises = set.set
-        .filter(setItem => setItem['@name'] !== '')
+        .filter(setItem => setItem['name'] !== '')
         .map(setItem => {
-          const trackName = setItem['@name'];
+          const trackName = setItem['name'];
           let trackArtist = set.artist;
           if (setItem.cover) {
-            trackArtist = setItem.cover['@name'];
+            trackArtist = setItem.cover['name'];
           }
           return $http({
             method: 'GET',
